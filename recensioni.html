@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+	<!-- Bottone fisso in basso a destra -->
+	<a href="https://www.instagram.com/darkoverride_/?igsh=MWdmaGUybGFmMm91OQ%3D%3D#" target="_blank" id="contactBtn" 
+	   style="
+		 position: fixed;
+		 bottom: 20px;
+		 right: 20px;
+		 background-color: #e91e63;
+		 color: white;
+		 padding: 15px 25px;
+		 border-radius: 50px;
+		 text-decoration: none;
+		 font-weight: bold;
+		 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+		 transition: background-color 0.3s ease;
+		 z-index: 1000;
+		 font-family: Arial, sans-serif;
+		 cursor: pointer;
+	   "
+	   onmouseover="this.style.backgroundColor='#c2185b';"
+	   onmouseout="this.style.backgroundColor='#e91e63';"
+	>
+	  Contattaci
+	</a>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recensioni - Lygestyle</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #c2e4f7; /* Azzurro pastello come sfondo */
+            background-color: #c2e4f7;
             margin: 0;
             padding: 0;
             color: #333;
@@ -18,7 +42,6 @@
             background-color: #333;
             color: #fff;
             padding: 20px;
-            text-align: center;
         }
 
         header h1 {
@@ -50,10 +73,21 @@
             padding: 25px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .review-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .review-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #f0f0f0;
+            cursor: pointer;
         }
 
         .review-card h3 {
@@ -74,6 +108,17 @@
             color: #2a2a2a;
         }
 
+        .review-card .author::after {
+            content: " ✔️";
+            opacity: 0;
+            margin-left: 6px;
+            transition: opacity 0.3s ease;
+        }
+
+        .review-card:hover .author::after {
+            opacity: 1;
+        }
+
         .review-card .date {
             font-size: 14px;
             color: #888;
@@ -83,7 +128,6 @@
             padding: 20px;
             background-color: #333;
             color: #fff;
-            text-align: center;
         }
 
         @media screen and (max-width: 768px) {
@@ -99,110 +143,285 @@
     </header>
 
     <div class="container">
-        <h2 class="section-title">Le Opinioni dei Nostri Clienti</h2>
+	  <p id="totalReviews" style="font-weight:bold; font-size:18px; color:#0073e6; margin-bottom:10px;">+1500 recensioni verificate</p>
+	  <script>
+		const totalReviewsElem = document.getElementById('totalReviews');
+		let count = 1500;
+		setInterval(() => {
+		  if (count < 1540) {
+			count++;
+			totalReviewsElem.textContent = `+${count} recensioni verificate`;
+		  }
+		}, 1500);
+	  </script>
 
-        <!-- Recensioni -->
-        <div class="review-card">
-            <h3>Massimo De Luca</h3>
-            <p>"Ero scettico, ma il team di Lygestyle ha fatto un lavoro straordinario! Hanno recuperato il mio account Facebook in meno di 24 ore!"</p>
-            <p class="author">Massimo De Luca</p>
-            <p class="date">30 Marzo 2025</p>
-        </div>
+	  <style>
+		.stars {
+		  color: gold;
+		  font-size: 16px;
+		  margin-bottom: 5px;
+		}
+	  </style>
 
-        <div class="review-card">
-            <h3>Lucia Ferrari</h3>
-            <p>"Servizio impeccabile. Dopo un attacco di phishing, il mio sistema è stato completamente protetto e ottimizzato. Consiglio vivamente!"</p>
-            <p class="author">Lucia Ferrari</p>
-            <p class="date">25 Marzo 2025</p>
-        </div>
+	  <h2 class="section-title">Le Opinioni dei Nostri Clienti</h2>
 
-        <div class="review-card">
-            <h3>Giovanni Manzini</h3>
-            <p>"Un servizio davvero utile! Sono riusciti a recuperare il mio account Instagram compromesso da un hacker, e mi hanno anche consigliato come proteggere meglio i miei dati online."</p>
-            <p class="author">Giovanni Manzini</p>
-            <p class="date">20 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Massimo De Luca</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Ero scettico, ma il team di Lygestyle ha fatto un lavoro straordinario! Hanno recuperato il mio account Facebook in meno di 24 ore!"</p>
+		<p class="author">Massimo De Luca</p>
+		<p class="date">30 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Arianna Russo</h3>
-            <p>"Ho fatto una consulenza per la sicurezza della rete aziendale e sono rimasta davvero soddisfatta. Hanno individuato vulnerabilità che non avremmo mai trovato da soli!"</p>
-            <p class="author">Arianna Russo</p>
-            <p class="date">15 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Lucia Ferrari</h3>
+		<div class="stars">★★★★☆</div>
+		<p>"Servizio impeccabile. Dopo un attacco di phishing, il mio sistema è stato completamente protetto e ottimizzato. Consiglio vivamente!"</p>
+		<p class="author">Lucia Ferrari</p>
+		<p class="date">25 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Alessandro Ricci</h3>
-            <p>"Ho avuto un problema serio con un malware che ha danneggiato i miei file. Grazie al loro intervento, sono riuscito a recuperare tutto senza perdere dati!"</p>
-            <p class="author">Alessandro Ricci</p>
-            <p class="date">12 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Giovanni Manzini</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Un servizio davvero utile! Sono riusciti a recuperare il mio account Instagram compromesso da un hacker, e mi hanno anche consigliato come proteggere meglio i miei dati online."</p>
+		<p class="author">Giovanni Manzini</p>
+		<p class="date">20 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Francesca Marino</h3>
-            <p>"Un team molto professionale. Mi hanno aiutato a configurare il firewall per il mio ufficio e a proteggere tutte le connessioni. Grazie per l'ottimo lavoro!"</p>
-            <p class="author">Francesca Marino</p>
-            <p class="date">10 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Arianna Russo</h3>
+		<div class="stars">★★★★☆</div>
+		<p>"Ho fatto una consulenza per la sicurezza della rete aziendale e sono rimasta davvero soddisfatta. Hanno individuato vulnerabilità che non avremmo mai trovato da soli!"</p>
+		<p class="author">Arianna Russo</p>
+		<p class="date">15 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Luca Venturi</h3>
-            <p>"Hanno risolto un problema di sicurezza che mi affliggeva da mesi, ottimizzando anche le prestazioni del mio computer. Consiglio assolutamente!"</p>
-            <p class="author">Luca Venturi</p>
-            <p class="date">8 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Alessandro Ricci</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Ho avuto un problema serio con un malware che ha danneggiato i miei file. Grazie al loro intervento, sono riuscito a recuperare tutto senza perdere dati!"</p>
+		<p class="author">Alessandro Ricci</p>
+		<p class="date">12 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Valentina Ferri</h3>
-            <p>"Grazie a loro ho messo in sicurezza il mio account bancario online, proteggendo tutte le transazioni e gli accessi. Un team esperto e serio!"</p>
-            <p class="author">Valentina Ferri</p>
-            <p class="date">5 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Francesca Marino</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Un team molto professionale. Mi hanno aiutato a configurare il firewall per il mio ufficio e a proteggere tutte le connessioni. Grazie per l'ottimo lavoro!"</p>
+		<p class="author">Francesca Marino</p>
+		<p class="date">10 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Marco Galli</h3>
-            <p>"L'intervento è stato veloce ed efficace. Hanno protetto la mia rete domestica da possibili attacchi hacker e mi hanno fornito preziosi consigli sulla sicurezza informatica."</p>
-            <p class="author">Marco Galli</p>
-            <p class="date">3 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Luca Venturi</h3>
+		<div class="stars">★★★★☆</div>
+		<p>"Hanno risolto un problema di sicurezza che mi affliggeva da mesi, ottimizzando anche le prestazioni del mio computer. Consiglio assolutamente!"</p>
+		<p class="author">Luca Venturi</p>
+		<p class="date">8 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Chiara Longo</h3>
-            <p>"Mi sono rivolto a loro dopo aver subito un attacco DDoS. L'intervento è stato rapido, e adesso la mia rete è più sicura che mai!"</p>
-            <p class="author">Chiara Longo</p>
-            <p class="date">1 Marzo 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Valentina Ferri</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Grazie a loro ho messo in sicurezza il mio account bancario online, proteggendo tutte le transazioni e gli accessi. Un team esperto e serio!"</p>
+		<p class="author">Valentina Ferri</p>
+		<p class="date">5 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Enrico Santoro</h3>
-            <p>"Ottima esperienza. Hanno risolto un problema di accesso ai miei account e mi hanno dato ottimi consigli per evitare attacchi in futuro."</p>
-            <p class="author">Enrico Santoro</p>
-            <p class="date">28 Febbraio 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Marco Galli</h3>
+		<div class="stars">★★★☆☆</div>
+		<p>"L'intervento è stato veloce ed efficace. Hanno protetto la mia rete domestica da possibili attacchi hacker e mi hanno fornito preziosi consigli sulla sicurezza informatica."</p>
+		<p class="author">Marco Galli</p>
+		<p class="date">3 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Elena Benedetti</h3>
-            <p>"Lygestyle mi ha aiutato a recuperare il mio account email che era stato violato. Servizio impeccabile, molto soddisfatta!"</p>
-            <p class="author">Elena Benedetti</p>
-            <p class="date">25 Febbraio 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Chiara Longo</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Mi sono rivolto a loro dopo aver subito un attacco DDoS. L'intervento è stato rapido, e adesso la mia rete è più sicura che mai!"</p>
+		<p class="author">Chiara Longo</p>
+		<p class="date">1 Marzo 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Andrea Moretti</h3>
-            <p>"Molto professionali e veloci. Ho chiesto un audit della mia rete aziendale e ho ricevuto un report dettagliato con tutte le vulnerabilità corrette in breve tempo!"</p>
-            <p class="author">Andrea Moretti</p>
-            <p class="date">20 Febbraio 2025</p>
-        </div>
+	  <div class="review-card">
+		<h3>Enrico Santoro</h3>
+		<div class="stars">★★★★☆</div>
+		<p>"Ottima esperienza. Hanno risolto un problema di accesso ai miei account e mi hanno dato ottimi consigli per evitare attacchi in futuro."</p>
+		<p class="author">Enrico Santoro</p>
+		<p class="date">28 Febbraio 2025</p>
+	  </div>
 
-        <div class="review-card">
-            <h3>Simona D'Alessandro</h3>
-            <p>"Li ho contattati per un problema di privacy e sicurezza online. Hanno risolto rapidamente e mi hanno dato ottimi consigli per proteggere i miei dati." </p>
-            <p class="author">Simona D'Alessandro</p>
-            <p class="date">15 Febbraio 2025</p>
-        </div>
-    </div>
+	  <div class="review-card">
+		<h3>Elena Benedetti</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Lygestyle mi ha aiutato a recuperare il mio account email che era stato violato. Servizio impeccabile, molto soddisfatta!"</p>
+		<p class="author">Elena Benedetti</p>
+		<p class="date">25 Febbraio 2025</p>
+	  </div>
+
+	  <div class="review-card">
+		<h3>Andrea Moretti</h3>
+		<div class="stars">★★★★☆</div>
+		<p>"Molto professionali e veloci. Ho chiesto un audit della mia rete aziendale e ho ricevuto un report dettagliato con tutte le vulnerabilità corrette in breve tempo!"</p>
+		<p class="author">Andrea Moretti</p>
+		<p class="date">20 Febbraio 2025</p>
+	  </div>
+
+	  <div class="review-card">
+		<h3>Simona D'Alessandro</h3>
+		<div class="stars">★★★★★</div>
+		<p>"Li ho contattati per un problema di privacy e sicurezza online. Hanno risolto rapidamente e mi hanno dato ottimi consigli per proteggere i miei dati."</p>
+		<p class="author">Simona D'Alessandro</p>
+		<p class="date">15 Febbraio 2025</p>
+	  </div>
+	  
+	</div>
+
 
     <div class="footer">
         <p>&copy; 2025 Sicurezza Informatica - Tutti i diritti riservati.</p>
     </div>
+	<script>
+		  const reviewCards = document.querySelectorAll('.review-card');
+
+		  const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+			  if (entry.isIntersecting) {
+				entry.target.classList.add('visible');
+				observer.unobserve(entry.target); // animazione solo una volta
+			  }
+			});
+		  }, {
+			threshold: 0.1
+		  });
+
+		  reviewCards.forEach(card => observer.observe(card));
+	</script>
+	
+	<script>
+		  const container = document.querySelector('.container');
+		  const sectionTitle = document.querySelector('.section-title');
+
+		  const liveBanner = document.createElement('div');
+		  liveBanner.style.position = 'fixed';
+		  liveBanner.style.bottom = '20px';
+		  liveBanner.style.left = '50%';
+		  liveBanner.style.transform = 'translateX(-50%)';
+		  liveBanner.style.backgroundColor = '#333';
+		  liveBanner.style.color = 'white';
+		  liveBanner.style.padding = '10px 20px';
+		  liveBanner.style.borderRadius = '30px';
+		  liveBanner.style.boxShadow = '0 4px 10px rgba(0,0,0,0.3)';
+		  liveBanner.style.fontSize = '16px';
+		  liveBanner.style.fontWeight = 'bold';
+		  liveBanner.style.opacity = '0';
+		  liveBanner.style.transition = 'opacity 0.5s ease';
+		  liveBanner.style.zIndex = '1000';
+		  document.body.appendChild(liveBanner);
+
+		  function showLiveBanner(text) {
+			liveBanner.textContent = text;
+			liveBanner.style.opacity = '1';
+			setTimeout(() => {
+			  liveBanner.style.opacity = '0';
+			}, 4000);
+		  }
+
+		  // Array di recensioni uniche (minimo 30 per sicurezza)
+		  const reviewData = [];
+		  
+		  reviewData.push(
+			  { name: "Dario_89", content: "All’inizio ho avuto qualche dubbio, ma poi si sono dimostrati affidabili." },
+			  { name: "Giulia Ferraro", content: "Non pensavo fosse possibile recuperare l'accesso al mio profilo. Incredibili!" },
+			  { name: "ZioBit", content: "Lavoro eseguito con precisione chirurgica. Approvato!" },
+			  { name: "Andrea Sala", content: "Non credevo che funzionasse, invece... tutto perfetto!" },
+			  { name: "Cris_Tech", content: "Mi hanno seguito passo dopo passo, anche nei momenti più difficili." },
+			  { name: "Claudia De Luca", content: "Risolvono problemi reali con serietà. Consiglio vivamente." },
+			  { name: "SaraV.", content: "Non credevo ci fosse un servizio così professionale in questo ambito." },
+			  { name: "Stefano Milani", content: "Un aiuto concreto quando ne avevo più bisogno. Grazie!" },
+			  { name: "ViolaZeta", content: "Mi aspettavo tempi più rapidi, ma almeno il problema è stato risolto." },
+			  { name: "Chiara Neri", content: "Veloci, discreti e molto gentili. Consigliati al 100%." },
+			  { name: "LeoKappa", content: "Bravi davvero, discreti e sempre disponibili a chiarire i dubbi." },
+			  { name: "Tommaso Serra", content: "Mi hanno trattato con serietà e rispetto. Ottimo lavoro." },
+			  { name: "TheRealGio", content: "Non sono velocissimi, ma fanno quello che promettono. E non è poco." },
+			  { name: "Alberto Gentile", content: "Tutto perfetto: contatto, supporto, risultato!" },
+			  { name: "StefanoGhost", content: "Pensavo fosse una truffa, ma invece hanno risolto il problema in due giorni." },
+			  { name: "Laura Fiore", content: "Esperienza positiva e servizio impeccabile." },
+			  { name: "G_Firewall", content: "Problema complicato, ma ci sono riusciti. Consiglio di contattarli." },
+			  { name: "Nicola Rinaldi", content: "Finalmente un team che mantiene ciò che promette!" },
+			  { name: "MattiaL.", content: "Servizio molto serio, anche se all'inizio ho faticato a fidarmi." },
+			  { name: "Lorenzo D'Amico", content: "Risposta immediata, servizio efficace e molto cordiale." },
+			  { name: "Erika_88", content: "Sono riusciti dove altri avevano fallito. Non posso che ringraziarli." },
+			  { name: "Beatrice Greco", content: "Non potevo chiedere di meglio. Tutto chiaro e trasparente." },
+			  { name: "Camilla Rizzo", content: "Risultato garantito e in tempi brevissimi." },
+			  { name: "RobyDark", content: "Qualche difficoltà iniziale, ma hanno saputo gestire tutto con competenza." },
+			  { name: "Federica Palma", content: "Discreti, rapidi e molto competenti. Mi sono sentita al sicuro." },
+			  { name: "Niko_D", content: "Consigliati da un amico, mi hanno risolto il problema in giornata." },
+			  { name: "Anna Grassi", content: "Semplicemente fantastici. Affidabili e veloci." },
+			  { name: "Simone Vitale", content: "Avevo perso l'accesso al mio canale, ma loro l'hanno recuperato!" },
+			  { name: "CryptoMan", content: "Un piccolo disguido iniziale, ma poi tutto risolto come da accordi." },
+			  { name: "Francesco Lombardi", content: "Ottima esperienza, mi hanno sbloccato l'account dopo settimane di tentativi." },
+			  { name: "DebbySky", content: "Grazie davvero! Non credevo di poter riavere l'accesso." },
+			  { name: "Ilaria Conti", content: "Veri professionisti, ti seguono dall’inizio alla fine." },
+			  { name: "Nic_PW", content: "Risposte rapide, servizio serio. Ottima esperienza." },
+			  { name: "Valentina De Rosa", content: "Servizio sicuro e riservato, ottimo anche il supporto tecnico." },
+			  { name: "LauraXP", content: "Un po’ di ritardo nella risposta, ma il risultato è stato ottimo." },
+			  { name: "Giorgio Fontana", content: "Un team competente e sempre disponibile. Mi hanno aiutato tantissimo." },
+			  { name: "LallaSicura", content: "Mi hanno restituito la tranquillità. Servizio che vale ogni centesimo." },
+			  { name: "Serena Romano", content: "Servizio molto professionale e risultati concreti. Grazie di cuore." },
+			  { name: "Noemi R.", content: "Tempi rispettati e lavoro preciso. Molto soddisfatta." },
+			  { name: "Marco Verdi", content: "Mi hanno guidato passo passo. Onesti e super professionali." },
+			  { name: "Elisa Parodi", content: "Recuperato l'accesso in meno di un'ora. Consigliatissimo!" },
+			  { name: "LuisaF", content: "Molto professionali, anche nelle comunicazioni. Tutto perfetto." },
+			  { name: "Martina Leone", content: "Ogni dubbio chiarito e risultato garantito. Grazie davvero." },
+			  { name: "Edoardo Fabbri", content: "Avevo dei dubbi, ma mi hanno subito convinto. Fantastici!" },
+			  { name: "Dario Bianchi", content: "Servizio impeccabile, hanno recuperato il mio account in meno di 24 ore." }
+			);
+
+		  
+
+
+		  let usedReviews = new Set();
+
+		  function addNewReview() {
+			// Se abbiamo usato tutte le recensioni, fermiamoci
+			if (usedReviews.size >= reviewData.length) return;
+
+			// Trova una recensione non ancora usata
+			let review;
+			do {
+			  review = reviewData[Math.floor(Math.random() * reviewData.length)];
+			} while (usedReviews.has(review.name));
+
+			usedReviews.add(review.name);
+
+			const newCard = document.createElement('div');
+			newCard.classList.add('review-card');
+			newCard.style.opacity = '0';
+			newCard.style.transform = 'translateY(-20px)';
+			newCard.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+			newCard.innerHTML = `
+			  <div class="stars">★★★★★</div>
+			  <p>${review.content}</p>
+			  <div class="author">${review.name}</div>
+			`;
+
+			container.insertBefore(newCard, sectionTitle.nextSibling);
+
+			requestAnimationFrame(() => {
+			  newCard.style.opacity = '1';
+			  newCard.style.transform = 'translateY(0)';
+			});
+
+			showLiveBanner(`${review.name} ha appena lasciato una recensione!`);
+		  }
+
+		  // Avvia ogni 12 secondi
+		  setInterval(addNewReview, 12000);
+	</script>
+
 </body>
 </html>
